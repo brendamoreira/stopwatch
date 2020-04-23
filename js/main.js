@@ -1,24 +1,36 @@
 let startButton = document.querySelector('.start');
 startButton.addEventListener('click', startStop);
-let second = document.querySelector('.seconds');
-let seconds = second.innerHTML;
-let minute = document.querySelector('.minutes');
-let minutes = minute.innerHTML;
-let hour = document.querySelector('.hours');
-let hours = hour.innerHTML
+let seconds = document.querySelector('.seconds');
+let minutes = document.querySelector('.minutes');
+let hours = document.querySelector('.hours');
+let sec = 0;
+let min = 0;
+let hour = 0;
+let interval;
 function startStop() {
-    console.log('clicked');
-    setInterval(function(){
-        console.log('1second');
+    interval = setInterval(function(){
+        sec += 1;
+        seconds.innerHTML = sec < 10 ? '0'+ sec: sec;
+        if (sec == 60) {
+            min += 1;
+            sec = 0;
+            minutes.innerHTML = min < 10 ? '0' + min: min;
+            if (min == 60) {
+                hour += 1;
+                min = 0;
+                hours.innerHTML = hour < 10 ? '0' + hour: hour;
+            }
+        }
+        
     }, 1000);
-    setInterval(function(){
-        console.log('1minute');
-    }, 60000);
-    setInterval(function(){
-        console.log('')
-    }, 3600000)
+    startButton.innerHTML = "Stop";
 }
 let restartButton = document.querySelector('.restart');
 restartButton.addEventListener('click', function(event) {
-    console.log('clickedR')
+    sec = 0;
+    min = 0;
+    hour = 0;
+    seconds.innerHTML = '00';
+    minutes.innerHTML = '00';
+    hours.innerHTML = '00';
 })
