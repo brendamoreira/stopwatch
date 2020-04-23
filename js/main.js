@@ -8,22 +8,28 @@ let min = 0;
 let hour = 0;
 let interval;
 function startStop() {
-    interval = setInterval(function(){
-        sec += 1;
-        seconds.innerHTML = sec < 10 ? '0'+ sec: sec;
-        if (sec == 60) {
-            min += 1;
-            sec = 0;
-            minutes.innerHTML = min < 10 ? '0' + min: min;
-            if (min == 60) {
-                hour += 1;
-                min = 0;
-                hours.innerHTML = hour < 10 ? '0' + hour: hour;
+    if (startButton.innerHTML == "Stop") {
+        clearInterval(interval);
+        startButton.innerHTML = "Start";
+    }else{
+        interval = setInterval(function(){
+            sec += 1;
+            seconds.innerHTML = sec < 10 ? '0'+ sec: sec;
+            if (sec == 60) {
+                min += 1;
+                sec = 0;
+                minutes.innerHTML = min < 10 ? '0' + min: min;
+                if (min == 60) {
+                    hour += 1;
+                    min = 0;
+                    hours.innerHTML = hour < 10 ? '0' + hour: hour;
+                }
             }
-        }
-        
-    }, 1000);
-    startButton.innerHTML = "Stop";
+            
+        }, 1000);
+        startButton.innerHTML = "Stop";
+    }
+    
 }
 let restartButton = document.querySelector('.restart');
 restartButton.addEventListener('click', function(event) {
